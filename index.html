@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crate & Co. — Farm Goods, Priced Honestly</title>
+<meta name="description" content="Crate & Co. — a simple, honest storefront for fresh farm goods.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crate:#6B4423;
+    --crate-dark:#4A2E17;
+    --cream:#FAF6ED;
+    --paper:#FFFFFF;
+    --olive:#4A6741;
+    --olive-dark:#37502F;
+    --tomato:#C1440E;
+    --mustard:#D9A62E;
+    --ink:#2B2118;
+    --ink-soft:#6B5F52;
+    --line:#E3D9C6;
+    --radius:10px;
+    --shadow:0 1px 2px rgba(43,33,24,0.06), 0 10px 24px -14px rgba(43,33,24,0.25);
+    --display:'Fraunces', serif;
+    --body:'Inter', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--cream); color:var(--ink); font-family:var(--body); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer;}
+  ul{margin:0; padding:0; list-style:none;}
+  h1,h2,h3{font-family:var(--display); margin:0; color:var(--ink); line-height:1.1;}
+  p{margin:0;}
+  :focus-visible{outline:2.5px solid var(--olive); outline-offset:2px;}
+  .container{max-width:1140px; margin:0 auto; padding:0 1.5rem;}
+  @media (max-width:640px){.container{padding:0 1.1rem;}}
+  .skip-link{position:absolute; left:-999px; top:0; background:var(--ink); color:#fff; padding:0.75rem 1.25rem; z-index:999;}
+  .skip-link:focus{left:0;}
+
+  /* ---------- Signature: torn price tag ---------- */
+  .price-tag{
+    display:inline-flex; align-items:center; gap:0.3rem; background:var(--mustard); color:var(--crate-dark);
+    font-family:var(--mono); font-weight:600; font-size:0.7rem; letter-spacing:0.03em;
+    padding:0.28rem 0.6rem 0.28rem 0.5rem; border-radius:0 4px 4px 0; transform:rotate(-2deg);
+    position:relative; box-shadow:0 2px 5px rgba(43,33,24,0.18);
+  }
+  .price-tag::before{content:''; position:absolute; left:-6px; top:50%; transform:translateY(-50%); width:8px; height:8px; background:var(--cream); border-radius:50%; border:1.5px solid var(--crate-dark);}
+
+  /* ---------- Header / Navbar ---------- */
+  .site-header{position:sticky; top:0; z-index:50; background:var(--cream); border-bottom:2px solid var(--ink); }
+  .nav-row{display:flex; align-items:center; justify-content:space-between; padding:1rem 0; gap:1rem;}
+  .logo{display:flex; align-items:center; gap:0.6rem; font-family:var(--display); font-weight:900; font-size:1.4rem;}
+  .logo .crate-mark{width:2.1rem; height:2.1rem; border-radius:5px; background:var(--olive); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-weight:700; font-size:0.95rem; transform:rotate(-6deg);}
+  .nav-links{display:flex; align-items:center; gap:2rem; font-weight:600; font-size:0.92rem;}
+  .nav-links a{padding:0.3rem 0; border-bottom:2px solid transparent;}
+  .nav-links a:hover{border-color:var(--olive);}
+  .nav-actions{display:flex; align-items:center; gap:0.9rem;}
+  .cart-btn{position:relative; display:flex; align-items:center; gap:0.5rem; background:var(--ink); color:#fff; border:none; padding:0.6rem 1.1rem; border-radius:100px; font-weight:700; font-size:0.85rem;}
+  .cart-btn:hover{background:var(--olive-dark);}
+  .cart-count{background:var(--tomato); color:#fff; border-radius:50%; width:1.3rem; height:1.3rem; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:0.68rem;}
+  .nav-toggle{display:none; background:none; border:2px solid var(--ink); border-radius:6px; width:2.4rem; height:2.4rem; align-items:center; justify-content:center; font-size:1.1rem;}
+  @media (max-width:800px){
+    .nav-links{position:absolute; top:100%; left:0; right:0; background:var(--cream); flex-direction:column; align-items:flex-start; gap:0; border-bottom:2px solid var(--ink); max-height:0; overflow:hidden; transition:max-height 0.25s ease;}
+    .nav-links.open{max-height:260px;}
+    .nav-links a{width:100%; padding:0.9rem 1.5rem; border-bottom:1px solid var(--line);}
+    .nav-toggle{display:flex;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:4rem 0 3.5rem; border-bottom:2px solid var(--ink);}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:3rem; align-items:center;}
+  .hero h1{font-size:clamp(2.1rem, 4.4vw, 3.3rem); font-weight:900;}
+  .hero .eyebrow{font-family:var(--mono); font-size:0.75rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--olive-dark); display:inline-block; margin-bottom:0.9rem;}
+  .hero p.lede{margin-top:1.1rem; font-size:1.05rem; color:var(--ink-soft); max-width:38ch;}
+  .hero-ctas{display:flex; gap:0.9rem; margin-top:1.8rem; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 1.6rem; border-radius:100px; font-weight:700; font-size:0.9rem; border:2px solid var(--ink); transition:transform 0.15s ease;}
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--ink); color:#fff;}
+  .btn-primary:hover{background:var(--olive-dark); border-color:var(--olive-dark);}
+  .btn-outline{background:transparent; color:var(--ink);}
+  .btn-outline:hover{background:var(--ink); color:#fff;}
+  .hero-visual{position:relative; aspect-ratio:1/0.85; background:var(--olive); border-radius:var(--radius); overflow:hidden; border:2px solid var(--ink);}
+  .hero-visual img{width:100%; height:100%; object-fit:cover;}
+  .hero-visual .price-tag{position:absolute; bottom:1rem; left:1rem;}
+  @media (max-width:800px){.hero-grid{grid-template-columns:1fr;} .hero-visual{order:-1;}}
+
+  /* ---------- Products ---------- */
+  .section{padding:4rem 0;}
+  .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:1rem; margin-bottom:2.2rem; flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(1.5rem,2.6vw,2rem); font-weight:800;}
+  .section-head p{color:var(--ink-soft); margin-top:0.4rem;}
+  .product-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:1.5rem;}
+  @media (max-width:980px){.product-grid{grid-template-columns:repeat(2, 1fr);}}
+  @media (max-width:480px){.product-grid{grid-template-columns:1fr;}}
+
+  .product-card{background:var(--paper); border:2px solid var(--ink); border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column; box-shadow:var(--shadow);}
+  .product-card .thumb{aspect-ratio:1/0.85; background:var(--cream); position:relative; overflow:hidden;}
+  .product-card .thumb img{width:100%; height:100%; object-fit:cover; transition:transform 0.35s ease;}
+  .product-card:hover .thumb img{transform:scale(1.05);}
+  .product-card .thumb .price-tag{position:absolute; top:0.7rem; right:0.7rem;}
+  .product-card .body{padding:1rem 1.1rem 1.2rem; display:flex; flex-direction:column; gap:0.6rem; flex:1;}
+  .product-card h3{font-size:1.02rem; font-weight:700;}
+  .product-card .desc{font-size:0.85rem; color:var(--ink-soft);}
+  .product-card .foot{margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:0.6rem;}
+  .product-card .price{font-family:var(--mono); font-weight:700; font-size:1.05rem;}
+  .add-cart-btn{background:var(--olive); color:#fff; border:none; border-radius:100px; padding:0.55rem 1rem; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.35rem;}
+  .add-cart-btn:hover{background:var(--olive-dark);}
+  .add-cart-btn.added{background:var(--tomato);}
+
+  /* ---------- Footer ---------- */
+  .site-footer{background:var(--ink); color:rgba(255,255,255,0.82); padding:3.2rem 0 1.6rem; margin-top:1rem;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:2.5rem;}
+  @media (max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:480px){.footer-grid{grid-template-columns:1fr;}}
+  .footer-grid h4{color:#fff; font-family:var(--body); font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:1rem;}
+  .footer-grid ul li{margin-bottom:0.6rem; font-size:0.88rem;}
+  .footer-grid ul li a:hover{color:#fff;}
+  .footer-logo{font-family:var(--display); font-weight:900; font-size:1.3rem; color:#fff; margin-bottom:0.8rem;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.15); margin-top:2.5rem; padding-top:1.4rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.8rem; font-size:0.78rem; color:rgba(255,255,255,0.55); font-family:var(--mono);}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- ============ NAVBAR ============ -->
+<header class="site-header">
+  <div class="container nav-row">
+    <a href="#main" class="logo"><span class="crate-mark">C&C</span> Crate &amp; Co.</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#main">Home</a>
+      <a href="#products">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="cart-btn" id="cartBtn" aria-label="View cart">
+        🧺 Cart <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Fresh off the crate</span>
+        <h1>Real food, priced like it's still 1985.</h1>
+        <p class="lede">No middlemen, no markup theatre — just produce from local growers, stamped with an honest price the day it's picked.</p>
+        <div class="hero-ctas">
+          <a href="#products" class="btn btn-primary">Shop the Crate</a>
+          <a href="#about" class="btn btn-outline">Our Story</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=60" alt="Wooden crate filled with fresh vegetables">
+        <span class="price-tag">Today's pick ★ 4.8</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCTS ============ -->
+  <section class="section" id="products">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>This week's crate</h2>
+          <p>Placeholder listings — swap in real photos, names and prices anytime.</p>
+        </div>
+      </div>
+
+      <div class="product-grid" id="productGrid">
+        <!-- Product cards -->
+        <article class="product-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=500&auto=format&fit=crop&q=60" alt="Basket of ripe red tomatoes">
+            <span class="price-tag">1 kg</span>
+          </div>
+          <div class="body">
+            <h3>Vine Tomatoes</h3>
+            <p class="desc">Sun-ripened, picked this morning.</p>
+            <div class="foot">
+              <span class="price">₹60</span>
+              <button class="add-cart-btn" data-name="Vine Tomatoes">+ Add</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?w=500&auto=format&fit=crop&q=60" alt="Bunch of fresh green spinach">
+            <span class="price-tag">500 g</span>
+          </div>
+          <div class="body">
+            <h3>Baby Spinach</h3>
+            <p class="desc">Tender leaves, washed and ready.</p>
+            <div class="foot">
+              <span class="price">₹35</span>
+              <button class="add-cart-btn" data-name="Baby Spinach">+ Add</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=500&auto=format&fit=crop&q=60" alt="Fresh oranges stacked together">
+            <span class="price-tag">1 kg</span>
+          </div>
+          <div class="body">
+            <h3>Nagpur Oranges</h3>
+            <p class="desc">Sweet, juicy, hand-picked.</p>
+            <div class="foot">
+              <span class="price">₹90</span>
+              <button class="add-cart-btn" data-name="Nagpur Oranges">+ Add</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=500&auto=format&fit=crop&q=60" alt="Fresh carrots with green tops">
+            <span class="price-tag">1 kg</span>
+          </div>
+          <div class="body">
+            <h3>Farm Carrots</h3>
+            <p class="desc">Crisp, earthy, straight from soil.</p>
+            <div class="foot">
+              <span class="price">₹45</span>
+              <button class="add-cart-btn" data-name="Farm Carrots">+ Add</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=500&auto=format&fit=crop&q=60" alt="Fresh green broccoli florets">
+            <span class="price-tag">500 g</span>
+          </div>
+          <div class="body">
+            <h3>Broccoli</h3>
+            <p class="desc">Firm heads, deep green colour.</p>
+            <div class="foot">
+              <span class="price">₹55</span>
+              <button class="add-cart-btn" data-name="Broccoli">+ Add</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=500&auto=format&fit=crop&q=60" alt="Bunch of bananas">
+            <span class="price-tag">1 dozen</span>
+          </div>
+          <div class="body">
+            <h3>Robusta Bananas</h3>
+            <p class="desc">Naturally ripened, no carbide.</p>
+            <div class="foot">
+              <span class="price">₹40</span>
+              <button class="add-cart-btn" data-name="Robusta Bananas">+ Add</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=500&auto=format&fit=crop&q=60" alt="Fresh red apples">
+            <span class="price-tag">1 kg</span>
+          </div>
+          <div class="body">
+            <h3>Shimla Apples</h3>
+            <p class="desc">Crisp bite, cold-stored fresh.</p>
+            <div class="foot">
+              <span class="price">₹120</span>
+              <button class="add-cart-btn" data-name="Shimla Apples">+ Add</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1587049693292-ce870cbf5eff?w=500&auto=format&fit=crop&q=60" alt="Fresh potatoes in a pile">
+            <span class="price-tag">2 kg</span>
+          </div>
+          <div class="body">
+            <h3>Table Potatoes</h3>
+            <p class="desc">All-purpose, low-moisture batch.</p>
+            <div class="foot">
+              <span class="price">₹50</span>
+              <button class="add-cart-btn" data-name="Table Potatoes">+ Add</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT (placeholder content section) ============ -->
+  <section class="section" id="about" style="background:var(--paper); border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);">
+    <div class="container" style="max-width:760px; text-align:center;">
+      <span class="eyebrow" style="font-family:var(--mono); font-size:0.75rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--olive-dark);">Our story</span>
+      <h2 style="margin-top:0.8rem; font-size:clamp(1.5rem,2.8vw,2.1rem);">Started from one crate at a Sunday market.</h2>
+      <p style="margin-top:1rem; color:var(--ink-soft);">Placeholder copy — replace with the real story: who started it, why, and what makes the sourcing different from a regular supermarket.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-logo">Crate &amp; Co.</div>
+      <p style="max-width:26ch; font-size:0.88rem;">Fresh, honestly-priced farm goods delivered to your door.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#products">Vegetables</a></li>
+        <li><a href="#products">Fruits</a></li>
+        <li><a href="#products">This week's crate</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li>hello@crateandco.example</li>
+        <li>+91 98765 43210</li>
+        <li>Ahmedabad, Gujarat</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 CRATE &amp; CO.</span>
+    <span>BUILT WITH HTML · CSS · JS</span>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Add to cart
+  let cartCount = 0;
+  const cartCountEl = document.getElementById('cartCount');
+  document.querySelectorAll('.add-cart-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      cartCount++;
+      cartCountEl.textContent = cartCount;
+      btn.textContent = '✓ Added';
+      btn.classList.add('added');
+      setTimeout(() => {
+        btn.textContent = '+ Add';
+        btn.classList.remove('added');
+      }, 900);
+    });
+  });
+</script>
+</body>
+</html>

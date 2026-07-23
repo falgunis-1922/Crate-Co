@@ -111,6 +111,23 @@
   .add-cart-btn:hover{background:var(--olive-dark);}
   .add-cart-btn.added{background:var(--tomato);}
 
+  /* ---------- Filters ---------- */
+  .filter-bar{display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:2rem;}
+  .filter-chip{background:var(--paper); border:2px solid var(--ink); color:var(--ink); padding:0.5rem 1.1rem; border-radius:100px; font-weight:700; font-size:0.82rem;}
+  .filter-chip:hover{background:var(--cream);}
+  .filter-chip.active{background:var(--ink); color:#fff;}
+
+  /* ---------- Badges & ratings ---------- */
+  .badge{position:absolute; top:0.7rem; left:0.7rem; padding:0.28rem 0.65rem; border-radius:100px; font-size:0.66rem; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; color:#fff; box-shadow:0 2px 5px rgba(43,33,24,0.18);}
+  .badge.organic{background:var(--olive);}
+  .badge.bestseller{background:var(--tomato);}
+  .badge.new{background:#3B6FA0;}
+  .rating{display:flex; align-items:center; gap:0.3rem; font-size:0.78rem; color:var(--ink-soft);}
+  .rating .stars{color:var(--mustard); letter-spacing:1px; font-size:0.85rem;}
+  .offer-strip{background:var(--olive); color:#fff; font-family:var(--mono); font-size:0.72rem; font-weight:600; padding:0.35rem 0.7rem; border-radius:6px; display:inline-block; width:fit-content;}
+  .price-row{display:flex; align-items:baseline; gap:0.45rem;}
+  .price-was{font-family:var(--mono); font-size:0.78rem; color:var(--ink-soft); text-decoration:line-through;}
+
   /* ---------- Footer ---------- */
   .site-footer{background:var(--ink); color:rgba(255,255,255,0.82); padding:3.2rem 0 1.6rem; margin-top:1rem;}
   .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:2.5rem;}
@@ -121,6 +138,53 @@
   .footer-grid ul li a:hover{color:#fff;}
   .footer-logo{font-family:var(--display); font-weight:900; font-size:1.3rem; color:#fff; margin-bottom:0.8rem;}
   .footer-bottom{border-top:1px solid rgba(255,255,255,0.15); margin-top:2.5rem; padding-top:1.4rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.8rem; font-size:0.78rem; color:rgba(255,255,255,0.55); font-family:var(--mono);}
+
+  /* ---------- Account button ---------- */
+  .account-btn{display:flex; align-items:center; gap:0.5rem; background:transparent; color:var(--ink); border:2px solid var(--ink); padding:0.55rem 1.05rem; border-radius:100px; font-weight:700; font-size:0.85rem;}
+  .account-btn:hover{background:var(--ink); color:#fff;}
+
+  /* ---------- Toast ---------- */
+  .toast-wrap{position:fixed; top:1.2rem; right:1.2rem; z-index:400; display:flex; flex-direction:column; gap:0.6rem;}
+  .toast{background:var(--ink); color:#fff; padding:0.8rem 1.1rem; border-radius:8px; font-size:0.88rem; font-weight:600; display:flex; align-items:center; gap:0.6rem; box-shadow:0 10px 24px -8px rgba(0,0,0,0.4); animation:toastIn 0.25s ease, toastOut 0.3s ease 2.7s forwards; max-width:280px;}
+  .toast.success{background:var(--olive-dark);}
+  .toast .dot{width:0.55rem; height:0.55rem; border-radius:50%; background:var(--mustard); flex-shrink:0;}
+  @keyframes toastIn{from{transform:translateX(30px); opacity:0;} to{transform:translateX(0); opacity:1;}}
+  @keyframes toastOut{to{transform:translateX(30px); opacity:0;}}
+
+  /* ---------- Modal overlay ---------- */
+  .overlay{position:fixed; inset:0; background:rgba(43,33,24,0.55); z-index:300; display:none; align-items:center; justify-content:center; padding:1.2rem;}
+  .overlay.open{display:flex;}
+  .modal{background:var(--paper); border:2px solid var(--ink); border-radius:var(--radius); width:100%; max-width:420px; max-height:88vh; overflow-y:auto; box-shadow:0 24px 50px -18px rgba(0,0,0,0.4);}
+  .modal-head{display:flex; align-items:center; justify-content:space-between; padding:1.2rem 1.4rem; border-bottom:2px solid var(--ink);}
+  .modal-head h3{font-size:1.15rem;}
+  .modal-close{background:none; border:none; font-size:1.3rem; line-height:1; color:var(--ink); padding:0.2rem 0.4rem;}
+  .modal-close:hover{color:var(--tomato);}
+  .modal-body{padding:1.4rem;}
+  .tabs{display:flex; gap:0.4rem; margin-bottom:1.2rem; background:var(--cream); border:2px solid var(--ink); border-radius:100px; padding:0.25rem;}
+  .tab-btn{flex:1; background:none; border:none; padding:0.5rem 0.8rem; border-radius:100px; font-weight:700; font-size:0.82rem; color:var(--ink-soft);}
+  .tab-btn.active{background:var(--ink); color:#fff;}
+  .form-panel{display:none; flex-direction:column; gap:0.9rem;}
+  .form-panel.active{display:flex;}
+  .field label{display:block; font-size:0.78rem; font-weight:700; margin-bottom:0.35rem; color:var(--ink-soft);}
+  .field input{width:100%; padding:0.65rem 0.85rem; border:2px solid var(--line); border-radius:6px; font-family:inherit; font-size:0.9rem; background:var(--cream); color:var(--ink);}
+  .field input:focus{border-color:var(--olive); outline:none;}
+  .success-panel{display:none; flex-direction:column; align-items:center; text-align:center; gap:0.9rem; padding:1rem 0 0.5rem;}
+  .success-panel.active{display:flex;}
+  .success-check{width:3.4rem; height:3.4rem; border-radius:50%; background:var(--olive); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.6rem;}
+  .success-panel h3{font-size:1.15rem;}
+  .success-panel p{color:var(--ink-soft); font-size:0.9rem;}
+
+  /* ---------- Cart modal ---------- */
+  .cart-line{display:flex; align-items:center; justify-content:space-between; padding:0.75rem 0; border-bottom:1px solid var(--line); gap:0.8rem;}
+  .cart-line .info h4{font-size:0.92rem; font-weight:700;}
+  .cart-line .info span{font-family:var(--mono); font-size:0.8rem; color:var(--ink-soft);}
+  .cart-line .qty-controls{display:flex; align-items:center; gap:0.5rem;}
+  .qty-btn{width:1.7rem; height:1.7rem; border-radius:50%; border:2px solid var(--ink); background:var(--cream); font-weight:700; display:flex; align-items:center; justify-content:center;}
+  .qty-btn:hover{background:var(--ink); color:#fff;}
+  .qty-val{font-family:var(--mono); font-weight:700; min-width:1.2rem; text-align:center; font-size:0.85rem;}
+  .cart-empty{text-align:center; color:var(--ink-soft); padding:1.5rem 0; font-size:0.9rem;}
+  .cart-total-row{display:flex; justify-content:space-between; align-items:center; font-weight:700; padding-top:1rem; margin-top:0.5rem; border-top:2px solid var(--ink);}
+  .cart-total-row .amt{font-family:var(--mono); font-size:1.1rem;}
 </style>
 </head>
 <body>
@@ -137,6 +201,7 @@
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-actions">
+      <button class="account-btn" id="accountBtn" aria-label="Sign in">👤 Sign In</button>
       <button class="cart-btn" id="cartBtn" aria-label="View cart">
         🧺 Cart <span class="cart-count" id="cartCount">0</span>
       </button>
@@ -176,69 +241,85 @@
         </div>
       </div>
 
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="vegetables">Vegetables</button>
+        <button class="filter-chip" data-filter="fruits">Fruits</button>
+        <button class="filter-chip" data-filter="offers">On Offer</button>
+      </div>
+
       <div class="product-grid" id="productGrid">
         <!-- Product cards -->
-        <article class="product-card">
+        <article class="product-card" data-category="vegetables">
           <div class="thumb">
             <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=500&auto=format&fit=crop&q=60" alt="Basket of ripe red tomatoes">
+            <span class="badge organic">Organic</span>
             <span class="price-tag">1 kg</span>
           </div>
           <div class="body">
             <h3>Vine Tomatoes</h3>
             <p class="desc">Sun-ripened, picked this morning.</p>
+            <div class="rating"><span class="stars">★★★★★</span> 4.5 (128)</div>
             <div class="foot">
-              <span class="price">₹60</span>
-              <button class="add-cart-btn" data-name="Vine Tomatoes">+ Add</button>
+              <span class="price-row"><span class="price">₹60</span></span>
+              <button class="add-cart-btn" data-name="Vine Tomatoes" data-price="60">+ Add</button>
             </div>
           </div>
         </article>
 
-        <article class="product-card">
+        <article class="product-card" data-category="vegetables">
           <div class="thumb">
             <img src="https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?w=500&auto=format&fit=crop&q=60" alt="Bunch of fresh green spinach">
+            <span class="badge new">New</span>
             <span class="price-tag">500 g</span>
           </div>
           <div class="body">
             <h3>Baby Spinach</h3>
             <p class="desc">Tender leaves, washed and ready.</p>
+            <div class="rating"><span class="stars">★★★★☆</span> 4.2 (54)</div>
             <div class="foot">
-              <span class="price">₹35</span>
-              <button class="add-cart-btn" data-name="Baby Spinach">+ Add</button>
+              <span class="price-row"><span class="price">₹35</span></span>
+              <button class="add-cart-btn" data-name="Baby Spinach" data-price="35">+ Add</button>
             </div>
           </div>
         </article>
 
-        <article class="product-card">
+        <article class="product-card" data-category="fruits offers">
           <div class="thumb">
             <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=500&auto=format&fit=crop&q=60" alt="Fresh oranges stacked together">
+            <span class="badge bestseller">Bestseller</span>
             <span class="price-tag">1 kg</span>
           </div>
           <div class="body">
             <h3>Nagpur Oranges</h3>
             <p class="desc">Sweet, juicy, hand-picked.</p>
+            <div class="rating"><span class="stars">★★★★★</span> 4.8 (312)</div>
+            <span class="offer-strip">10% OFF today</span>
             <div class="foot">
-              <span class="price">₹90</span>
-              <button class="add-cart-btn" data-name="Nagpur Oranges">+ Add</button>
+              <span class="price-row"><span class="price">₹90</span><span class="price-was">₹100</span></span>
+              <button class="add-cart-btn" data-name="Nagpur Oranges" data-price="90">+ Add</button>
             </div>
           </div>
         </article>
 
-        <article class="product-card">
+        <article class="product-card" data-category="vegetables">
           <div class="thumb">
             <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=500&auto=format&fit=crop&q=60" alt="Fresh carrots with green tops">
+            <span class="badge organic">Organic</span>
             <span class="price-tag">1 kg</span>
           </div>
           <div class="body">
             <h3>Farm Carrots</h3>
             <p class="desc">Crisp, earthy, straight from soil.</p>
+            <div class="rating"><span class="stars">★★★★☆</span> 4.4 (89)</div>
             <div class="foot">
-              <span class="price">₹45</span>
-              <button class="add-cart-btn" data-name="Farm Carrots">+ Add</button>
+              <span class="price-row"><span class="price">₹45</span></span>
+              <button class="add-cart-btn" data-name="Farm Carrots" data-price="45">+ Add</button>
             </div>
           </div>
         </article>
 
-        <article class="product-card">
+        <article class="product-card" data-category="vegetables offers">
           <div class="thumb">
             <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=500&auto=format&fit=crop&q=60" alt="Fresh green broccoli florets">
             <span class="price-tag">500 g</span>
@@ -246,44 +327,51 @@
           <div class="body">
             <h3>Broccoli</h3>
             <p class="desc">Firm heads, deep green colour.</p>
+            <div class="rating"><span class="stars">★★★★☆</span> 4.1 (40)</div>
+            <span class="offer-strip">Save ₹10</span>
             <div class="foot">
-              <span class="price">₹55</span>
-              <button class="add-cart-btn" data-name="Broccoli">+ Add</button>
+              <span class="price-row"><span class="price">₹55</span><span class="price-was">₹65</span></span>
+              <button class="add-cart-btn" data-name="Broccoli" data-price="55">+ Add</button>
             </div>
           </div>
         </article>
 
-        <article class="product-card">
+        <article class="product-card" data-category="fruits">
           <div class="thumb">
             <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=500&auto=format&fit=crop&q=60" alt="Bunch of bananas">
+            <span class="badge bestseller">Bestseller</span>
             <span class="price-tag">1 dozen</span>
           </div>
           <div class="body">
             <h3>Robusta Bananas</h3>
             <p class="desc">Naturally ripened, no carbide.</p>
+            <div class="rating"><span class="stars">★★★★★</span> 4.6 (201)</div>
             <div class="foot">
-              <span class="price">₹40</span>
-              <button class="add-cart-btn" data-name="Robusta Bananas">+ Add</button>
+              <span class="price-row"><span class="price">₹40</span></span>
+              <button class="add-cart-btn" data-name="Robusta Bananas" data-price="40">+ Add</button>
             </div>
           </div>
         </article>
 
-        <article class="product-card">
+        <article class="product-card" data-category="fruits offers">
           <div class="thumb">
             <img src="https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=500&auto=format&fit=crop&q=60" alt="Fresh red apples">
+            <span class="badge new">New</span>
             <span class="price-tag">1 kg</span>
           </div>
           <div class="body">
             <h3>Shimla Apples</h3>
             <p class="desc">Crisp bite, cold-stored fresh.</p>
+            <div class="rating"><span class="stars">★★★★★</span> 4.7 (167)</div>
+            <span class="offer-strip">Festive price</span>
             <div class="foot">
-              <span class="price">₹120</span>
-              <button class="add-cart-btn" data-name="Shimla Apples">+ Add</button>
+              <span class="price-row"><span class="price">₹120</span><span class="price-was">₹140</span></span>
+              <button class="add-cart-btn" data-name="Shimla Apples" data-price="120">+ Add</button>
             </div>
           </div>
         </article>
 
-        <article class="product-card">
+        <article class="product-card" data-category="vegetables">
           <div class="thumb">
             <img src="https://images.unsplash.com/photo-1587049693292-ce870cbf5eff?w=500&auto=format&fit=crop&q=60" alt="Fresh potatoes in a pile">
             <span class="price-tag">2 kg</span>
@@ -291,9 +379,10 @@
           <div class="body">
             <h3>Table Potatoes</h3>
             <p class="desc">All-purpose, low-moisture batch.</p>
+            <div class="rating"><span class="stars">★★★★☆</span> 4.0 (76)</div>
             <div class="foot">
-              <span class="price">₹50</span>
-              <button class="add-cart-btn" data-name="Table Potatoes">+ Add</button>
+              <span class="price-row"><span class="price">₹50</span></span>
+              <button class="add-cart-btn" data-name="Table Potatoes" data-price="50">+ Add</button>
             </div>
           </div>
         </article>
@@ -350,6 +439,114 @@
   </div>
 </footer>
 
+<!-- ============ TOAST CONTAINER ============ -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ============ SIGN IN / REGISTER MODAL ============ -->
+<div class="overlay" id="accountOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="accountModalTitle">
+    <div class="modal-head">
+      <h3 id="accountModalTitle">Your Account</h3>
+      <button class="modal-close" data-close="accountOverlay" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="signin">Sign In</button>
+        <button class="tab-btn" data-tab="register">Create Account</button>
+      </div>
+
+      <form class="form-panel active" id="signinPanel" data-panel="signin">
+        <div class="field">
+          <label for="siEmail">Email</label>
+          <input type="email" id="siEmail" required placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="siPassword">Password</label>
+          <input type="password" id="siPassword" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn btn-primary" style="justify-content:center; width:100%;">Sign In</button>
+      </form>
+
+      <form class="form-panel" id="registerPanel" data-panel="register">
+        <div class="field">
+          <label for="regName">Full Name</label>
+          <input type="text" id="regName" required placeholder="Jane Doe">
+        </div>
+        <div class="field">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" required placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="regPassword">Password</label>
+          <input type="password" id="regPassword" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn btn-primary" style="justify-content:center; width:100%;">Create Account</button>
+      </form>
+
+      <div class="success-panel" id="accountSuccessPanel">
+        <div class="success-check">✓</div>
+        <h3 id="accountSuccessTitle">Signed in successfully!</h3>
+        <p id="accountSuccessText">Welcome back to Crate &amp; Co.</p>
+        <button class="btn btn-outline" data-close="accountOverlay">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CART / CHECKOUT MODAL ============ -->
+<div class="overlay" id="cartOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="cartModalTitle">
+    <div class="modal-head">
+      <h3 id="cartModalTitle">Your Cart</h3>
+      <button class="modal-close" data-close="cartOverlay" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- Cart view -->
+      <div id="cartViewPanel">
+        <div id="cartLines"></div>
+        <div class="cart-empty" id="cartEmptyMsg" style="display:none;">Your cart is empty — add something fresh!</div>
+        <div class="cart-total-row">
+          <span>Total</span>
+          <span class="amt" id="cartTotalAmt">₹0</span>
+        </div>
+        <button class="btn btn-primary" id="goToCheckoutBtn" style="justify-content:center; width:100%; margin-top:1.2rem;">Proceed to Checkout</button>
+      </div>
+
+      <!-- Checkout view -->
+      <form class="form-panel" id="checkoutPanel" data-panel="checkout" style="display:none;">
+        <div class="field">
+          <label for="coName">Full Name</label>
+          <input type="text" id="coName" required placeholder="Jane Doe">
+        </div>
+        <div class="field">
+          <label for="coAddress">Delivery Address</label>
+          <input type="text" id="coAddress" required placeholder="House no., street, city">
+        </div>
+        <div class="field">
+          <label for="coPhone">Phone Number</label>
+          <input type="tel" id="coPhone" required placeholder="+91 98765 43210">
+        </div>
+        <div class="cart-total-row">
+          <span>Order Total</span>
+          <span class="amt" id="checkoutTotalAmt">₹0</span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="justify-content:center; width:100%;">Place Order</button>
+        <button type="button" class="btn btn-outline" id="backToCartBtn" style="justify-content:center; width:100%;">Back to Cart</button>
+      </form>
+
+      <!-- Order success view -->
+      <div class="success-panel" id="checkoutSuccessPanel">
+        <div class="success-check">✓</div>
+        <h3>Order placed successfully!</h3>
+        <p id="orderSuccessText">Your crate is on its way.</p>
+        <button class="btn btn-outline" data-close="cartOverlay">Continue Shopping</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <script>
   // Mobile nav toggle
   const navToggle = document.getElementById('navToggle');
@@ -363,20 +560,210 @@
     navToggle.setAttribute('aria-expanded', 'false');
   }));
 
-  // Add to cart
-  let cartCount = 0;
+  // ---------- Product filters ----------
+  const filterChips = document.querySelectorAll('.filter-chip');
+  const productCards = document.querySelectorAll('.product-card');
+  filterChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      filterChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.filter;
+      productCards.forEach(card => {
+        const cats = card.dataset.category || '';
+        card.style.display = (f === 'all' || cats.includes(f)) ? 'flex' : 'none';
+      });
+    });
+  });
+
+  // ---------- Toast ----------
+  function showToast(message, isSuccess=true){
+    const wrap = document.getElementById('toastWrap');
+    const t = document.createElement('div');
+    t.className = 'toast' + (isSuccess ? ' success' : '');
+    t.innerHTML = `<span class="dot"></span><span>${message}</span>`;
+    wrap.appendChild(t);
+    setTimeout(() => t.remove(), 3000);
+  }
+
+  // ---------- Overlay helpers ----------
+  function openOverlay(id){ document.getElementById(id).classList.add('open'); }
+  function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
+  document.querySelectorAll('[data-close]').forEach(el => {
+    el.addEventListener('click', () => closeOverlay(el.getAttribute('data-close')));
+  });
+  document.querySelectorAll('.overlay').forEach(ov => {
+    ov.addEventListener('click', (e) => { if(e.target === ov) closeOverlay(ov.id); });
+  });
+
+  // ---------- Sign In / Register modal ----------
+  const accountBtn = document.getElementById('accountBtn');
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const signinPanel = document.getElementById('signinPanel');
+  const registerPanel = document.getElementById('registerPanel');
+  const accountSuccessPanel = document.getElementById('accountSuccessPanel');
+
+  accountBtn.addEventListener('click', () => {
+    resetAccountModal();
+    openOverlay('accountOverlay');
+  });
+
+  function resetAccountModal(){
+    signinPanel.classList.add('active');
+    registerPanel.classList.remove('active');
+    accountSuccessPanel.classList.remove('active');
+    signinPanel.style.display = 'flex';
+    registerPanel.style.display = 'none';
+    tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === 'signin'));
+  }
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      signinPanel.style.display = tab === 'signin' ? 'flex' : 'none';
+      registerPanel.style.display = tab === 'register' ? 'flex' : 'none';
+      accountSuccessPanel.classList.remove('active');
+    });
+  });
+
+  signinPanel.addEventListener('submit', (e) => {
+    e.preventDefault();
+    signinPanel.style.display = 'none';
+    registerPanel.style.display = 'none';
+    document.querySelector('.tabs').style.display = 'none';
+    accountSuccessPanel.classList.add('active');
+    document.getElementById('accountSuccessTitle').textContent = 'Signed in successfully!';
+    document.getElementById('accountSuccessText').textContent = 'Welcome back to Crate & Co.';
+    accountBtn.innerHTML = '👤 ' + document.getElementById('siEmail').value.split('@')[0];
+    showToast('Signed in successfully!');
+  });
+
+  registerPanel.addEventListener('submit', (e) => {
+    e.preventDefault();
+    signinPanel.style.display = 'none';
+    registerPanel.style.display = 'none';
+    document.querySelector('.tabs').style.display = 'none';
+    accountSuccessPanel.classList.add('active');
+    document.getElementById('accountSuccessTitle').textContent = 'Account created successfully!';
+    document.getElementById('accountSuccessText').textContent = 'You\'re all set, ' + document.getElementById('regName').value.split(' ')[0] + '.';
+    accountBtn.innerHTML = '👤 ' + document.getElementById('regName').value.split(' ')[0];
+    showToast('Account created successfully!');
+  });
+
+  document.getElementById('accountOverlay').addEventListener('click', (e) => {
+    if(e.target.closest('[data-close]') || e.target.id === 'accountOverlay'){
+      document.querySelector('.tabs').style.display = 'flex';
+    }
+  });
+
+  // ---------- Cart state ----------
+  let cart = []; // {name, price, qty}
   const cartCountEl = document.getElementById('cartCount');
+  const cartLines = document.getElementById('cartLines');
+  const cartEmptyMsg = document.getElementById('cartEmptyMsg');
+  const cartTotalAmt = document.getElementById('cartTotalAmt');
+  const checkoutTotalAmt = document.getElementById('checkoutTotalAmt');
+
+  function updateCartCount(){
+    const total = cart.reduce((sum, i) => sum + i.qty, 0);
+    cartCountEl.textContent = total;
+  }
+
+  function addToCart(name, price){
+    const existing = cart.find(i => i.name === name);
+    if(existing){ existing.qty++; }
+    else { cart.push({name, price, qty:1}); }
+    updateCartCount();
+  }
+
+  function renderCart(){
+    if(cart.length === 0){
+      cartLines.innerHTML = '';
+      cartEmptyMsg.style.display = 'block';
+    } else {
+      cartEmptyMsg.style.display = 'none';
+      cartLines.innerHTML = cart.map(item => `
+        <div class="cart-line">
+          <div class="info">
+            <h4>${item.name}</h4>
+            <span>₹${item.price} × ${item.qty}</span>
+          </div>
+          <div class="qty-controls">
+            <button class="qty-btn" data-action="dec" data-name="${item.name}">−</button>
+            <span class="qty-val">${item.qty}</span>
+            <button class="qty-btn" data-action="inc" data-name="${item.name}">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+    const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+    cartTotalAmt.textContent = '₹' + total;
+    checkoutTotalAmt.textContent = '₹' + total;
+  }
+
+  cartLines.addEventListener('click', (e) => {
+    const btn = e.target.closest('.qty-btn');
+    if(!btn) return;
+    const name = btn.dataset.name;
+    const item = cart.find(i => i.name === name);
+    if(!item) return;
+    if(btn.dataset.action === 'inc'){ item.qty++; }
+    else { item.qty--; if(item.qty <= 0){ cart = cart.filter(i => i.name !== name); } }
+    updateCartCount();
+    renderCart();
+  });
+
   document.querySelectorAll('.add-cart-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      cartCount++;
-      cartCountEl.textContent = cartCount;
+      addToCart(btn.dataset.name, Number(btn.dataset.price));
       btn.textContent = '✓ Added';
       btn.classList.add('added');
+      showToast(btn.dataset.name + ' added to cart');
       setTimeout(() => {
         btn.textContent = '+ Add';
         btn.classList.remove('added');
       }, 900);
     });
+  });
+
+  // ---------- Cart / Checkout modal flow ----------
+  const cartBtn = document.getElementById('cartBtn');
+  const cartViewPanel = document.getElementById('cartViewPanel');
+  const checkoutPanel = document.getElementById('checkoutPanel');
+  const checkoutSuccessPanel = document.getElementById('checkoutSuccessPanel');
+
+  cartBtn.addEventListener('click', () => {
+    cartViewPanel.style.display = 'block';
+    checkoutPanel.style.display = 'none';
+    checkoutSuccessPanel.classList.remove('active');
+    document.getElementById('cartModalTitle').textContent = 'Your Cart';
+    renderCart();
+    openOverlay('cartOverlay');
+  });
+
+  document.getElementById('goToCheckoutBtn').addEventListener('click', () => {
+    if(cart.length === 0){ showToast('Add something to your cart first', false); return; }
+    cartViewPanel.style.display = 'none';
+    checkoutPanel.style.display = 'flex';
+    document.getElementById('cartModalTitle').textContent = 'Checkout';
+  });
+
+  document.getElementById('backToCartBtn').addEventListener('click', () => {
+    checkoutPanel.style.display = 'none';
+    cartViewPanel.style.display = 'block';
+    document.getElementById('cartModalTitle').textContent = 'Your Cart';
+  });
+
+  checkoutPanel.addEventListener('submit', (e) => {
+    e.preventDefault();
+    checkoutPanel.style.display = 'none';
+    checkoutSuccessPanel.classList.add('active');
+    document.getElementById('cartModalTitle').textContent = 'Order Confirmed';
+    document.getElementById('orderSuccessText').textContent = 'Thanks ' + document.getElementById('coName').value.split(' ')[0] + ', your crate is on its way.';
+    showToast('Order placed successfully!');
+    cart = [];
+    updateCartCount();
   });
 </script>
 </body>

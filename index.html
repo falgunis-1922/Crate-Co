@@ -132,6 +132,10 @@
   .price-row{display:flex; align-items:baseline; gap:0.45rem;}
   .price-was{font-family:var(--mono); font-size:0.78rem; color:var(--ink-soft); text-decoration:line-through;}
 
+  /* ---------- Page routing (Home / About / Contact shown one at a time) ---------- */
+  .page{display:none;}
+  .page.page-active{display:block;}
+
   /* ---------- Footer ---------- */
   .site-footer{background:var(--ink); color:rgba(255,255,255,0.82); padding:3.2rem 0 1.6rem; margin-top:4rem;}
   .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:2.5rem;}
@@ -271,6 +275,8 @@
 </header>
 
 <main id="main">
+
+  <div class="page page-active" id="page-home">
 
   <!-- ============ HERO ============ -->
   <section class="hero">
@@ -450,8 +456,10 @@
     </div>
   </section>
 
+  </div><!-- /#page-home -->
+
   <!-- ============ ABOUT (placeholder content section) ============ -->
-  <section class="section" id="about" style="background:var(--paper); border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);">
+  <section class="section page" id="about" style="background:var(--paper); border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);">
     <div class="container" style="max-width:760px; text-align:center;">
       <span class="eyebrow" style="font-family:var(--mono); font-size:0.75rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--olive-dark);">Our story</span>
       <h2 style="margin-top:0.8rem; font-size:clamp(1.5rem,2.8vw,2.1rem);">Started from one crate at a Sunday market.</h2>
@@ -462,7 +470,7 @@
 </main>
 
 <!-- ============ FOOTER ============ -->
-<footer class="site-footer" id="contact">
+<footer class="site-footer page" id="contact">
   <div class="container footer-grid">
     <div>
       <div class="footer-logo">Crate &amp; Co.</div>
@@ -615,6 +623,41 @@
     const isOpen = navLinks.classList.toggle('open');
     navToggle.setAttribute('aria-expanded', isOpen);
   });
+  // ---------- Page router: show only Home / About / Contact at a time ----------
+  const pageIds = ['page-home', 'about', 'contact'];
+  function pageIdForHash(hash){
+    if(hash === '#about') return 'about';
+    if(hash === '#contact') return 'contact';
+    return 'page-home'; // #main, #products, or anything else lives on the home page
+  }
+  function showPage(pageId){
+    pageIds.forEach(id => {
+      document.getElementById(id).classList.toggle('page-active', id === pageId);
+    });
+  }
+  function goToHash(hash, pushState){
+    const pageId = pageIdForHash(hash);
+    showPage(pageId);
+    if(pushState){ history.pushState(null, '', hash); }
+    requestAnimationFrame(() => {
+      const target = document.querySelector(hash);
+      if(target) target.scrollIntoView({behavior:'auto', block:'start'});
+      else window.scrollTo(0, 0);
+    });
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const hash = a.getAttribute('href');
+      if(!hash || hash === '#') return;
+      e.preventDefault();
+      goToHash(hash, true);
+    });
+  });
+  window.addEventListener('popstate', () => {
+    goToHash(location.hash || '#main', false);
+  });
+  goToHash(location.hash || '#main', false);
+
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     navLinks.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');

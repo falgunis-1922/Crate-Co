@@ -77,8 +77,9 @@
   .hero .eyebrow{font-family:var(--mono); font-size:0.75rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--olive-dark); display:inline-block; margin-bottom:0.9rem;}
   .hero p.lede{margin-top:1.1rem; font-size:1.05rem; color:var(--ink-soft); max-width:38ch;}
   .hero-ctas{display:flex; gap:0.9rem; margin-top:1.8rem; flex-wrap:wrap;}
-  .btn{display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 1.6rem; border-radius:100px; font-weight:700; font-size:0.9rem; border:2px solid var(--ink); transition:transform 0.15s ease;}
+  .btn{display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 1.6rem; border-radius:100px; font-weight:700; font-size:0.9rem; border:2px solid var(--ink); transition:transform 0.15s ease, background 0.15s ease, color 0.15s ease;}
   .btn:active{transform:scale(0.97);}
+  .btn:hover{transform:translateY(-1px);}
   .btn-primary{background:var(--ink); color:#fff;}
   .btn-primary:hover{background:var(--olive-dark); border-color:var(--olive-dark);}
   .btn-outline{background:transparent; color:var(--ink);}
@@ -105,15 +106,18 @@
   .product-card .body{padding:1rem 1.1rem 1.2rem; display:flex; flex-direction:column; gap:0.6rem; flex:1;}
   .product-card h3{font-size:1.02rem; font-weight:700;}
   .product-card .desc{font-size:0.85rem; color:var(--ink-soft);}
-  .product-card .foot{margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:0.6rem;}
+  .product-card .foot{margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:0.6rem; flex-wrap:wrap;}
   .product-card .price{font-family:var(--mono); font-weight:700; font-size:1.05rem;}
-  .add-cart-btn{background:var(--olive); color:#fff; border:none; border-radius:100px; padding:0.55rem 1rem; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.35rem;}
-  .add-cart-btn:hover{background:var(--olive-dark);}
+  .add-cart-btn{background:var(--olive); color:#fff; border:none; border-radius:100px; padding:0.55rem 1rem; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.35rem; transition:background 0.15s ease, transform 0.15s ease; white-space:nowrap;}
+  .add-cart-btn:hover{background:var(--olive-dark); transform:translateY(-1px);}
+  .add-cart-btn:active{transform:translateY(0);}
   .add-cart-btn.added{background:var(--tomato);}
+  .add-cart-btn.locked{background:var(--ink-soft); font-size:0.72rem;}
+  .add-cart-btn.locked:hover{background:var(--crate-dark);}
 
   /* ---------- Filters ---------- */
   .filter-bar{display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:2rem;}
-  .filter-chip{background:var(--paper); border:2px solid var(--ink); color:var(--ink); padding:0.5rem 1.1rem; border-radius:100px; font-weight:700; font-size:0.82rem;}
+  .filter-chip{background:var(--paper); border:2px solid var(--ink); color:var(--ink); padding:0.5rem 1.1rem; border-radius:100px; font-weight:700; font-size:0.82rem; transition:background 0.15s ease, color 0.15s ease;}
   .filter-chip:hover{background:var(--cream);}
   .filter-chip.active{background:var(--ink); color:#fff;}
 
@@ -161,7 +165,7 @@
   .modal-close:hover{color:var(--tomato);}
   .modal-body{padding:1.4rem;}
   .tabs{display:flex; gap:0.4rem; margin-bottom:1.2rem; background:var(--cream); border:2px solid var(--ink); border-radius:100px; padding:0.25rem;}
-  .tab-btn{flex:1; background:none; border:none; padding:0.5rem 0.8rem; border-radius:100px; font-weight:700; font-size:0.82rem; color:var(--ink-soft);}
+  .tab-btn{flex:1; background:none; border:none; padding:0.5rem 0.8rem; border-radius:100px; font-weight:700; font-size:0.82rem; color:var(--ink-soft); transition:background 0.15s ease, color 0.15s ease;}
   .tab-btn.active{background:var(--ink); color:#fff;}
   .form-panel{display:none; flex-direction:column; gap:0.9rem;}
   .form-panel.active{display:flex;}
@@ -179,7 +183,7 @@
   .cart-line .info h4{font-size:0.92rem; font-weight:700;}
   .cart-line .info span{font-family:var(--mono); font-size:0.8rem; color:var(--ink-soft);}
   .cart-line .qty-controls{display:flex; align-items:center; gap:0.5rem;}
-  .qty-btn{width:1.7rem; height:1.7rem; border-radius:50%; border:2px solid var(--ink); background:var(--cream); font-weight:700; display:flex; align-items:center; justify-content:center;}
+  .qty-btn{width:1.7rem; height:1.7rem; border-radius:50%; border:2px solid var(--ink); background:var(--cream); font-weight:700; display:flex; align-items:center; justify-content:center; transition:background 0.15s ease, color 0.15s ease;}
   .qty-btn:hover{background:var(--ink); color:#fff;}
   .qty-val{font-family:var(--mono); font-weight:700; min-width:1.2rem; text-align:center; font-size:0.85rem;}
   .cart-empty{text-align:center; color:var(--ink-soft); padding:1.5rem 0; font-size:0.9rem;}
@@ -601,6 +605,7 @@
   const signinPanel = document.getElementById('signinPanel');
   const registerPanel = document.getElementById('registerPanel');
   const accountSuccessPanel = document.getElementById('accountSuccessPanel');
+  let isSignedIn = false;
 
   accountBtn.addEventListener('click', () => {
     resetAccountModal();
@@ -613,6 +618,7 @@
     accountSuccessPanel.classList.remove('active');
     signinPanel.style.display = 'flex';
     registerPanel.style.display = 'none';
+    document.querySelector('.tabs').style.display = 'flex';
     tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === 'signin'));
   }
 
@@ -636,6 +642,7 @@
     document.getElementById('accountSuccessTitle').textContent = 'Signed in successfully!';
     document.getElementById('accountSuccessText').textContent = 'Welcome back to Crate & Co.';
     accountBtn.innerHTML = '👤 ' + document.getElementById('siEmail').value.split('@')[0];
+    markSignedIn();
     showToast('Signed in successfully!');
   });
 
@@ -648,8 +655,14 @@
     document.getElementById('accountSuccessTitle').textContent = 'Account created successfully!';
     document.getElementById('accountSuccessText').textContent = 'You\'re all set, ' + document.getElementById('regName').value.split(' ')[0] + '.';
     accountBtn.innerHTML = '👤 ' + document.getElementById('regName').value.split(' ')[0];
+    markSignedIn();
     showToast('Account created successfully!');
   });
+
+  function markSignedIn(){
+    isSignedIn = true;
+    updateCartButtonsLockState();
+  }
 
   document.getElementById('accountOverlay').addEventListener('click', (e) => {
     if(e.target.closest('[data-close]') || e.target.id === 'accountOverlay'){
@@ -714,8 +727,28 @@
     renderCart();
   });
 
+  function updateCartButtonsLockState(){
+    document.querySelectorAll('.add-cart-btn').forEach(btn => {
+      if(isSignedIn){
+        btn.classList.remove('locked');
+        btn.innerHTML = '+ Add';
+        btn.title = '';
+      } else {
+        btn.classList.add('locked');
+        btn.innerHTML = '🔒 Sign in to add';
+        btn.title = 'Sign in to add items to your cart';
+      }
+    });
+  }
+
   document.querySelectorAll('.add-cart-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      if(!isSignedIn){
+        showToast('Please sign in to add items to your cart', false);
+        resetAccountModal();
+        openOverlay('accountOverlay');
+        return;
+      }
       addToCart(btn.dataset.name, Number(btn.dataset.price));
       btn.textContent = '✓ Added';
       btn.classList.add('added');
@@ -726,6 +759,8 @@
       }, 900);
     });
   });
+
+  updateCartButtonsLockState();
 
   // ---------- Cart / Checkout modal flow ----------
   const cartBtn = document.getElementById('cartBtn');
